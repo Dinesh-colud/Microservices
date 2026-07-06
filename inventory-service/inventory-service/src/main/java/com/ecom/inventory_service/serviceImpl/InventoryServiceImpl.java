@@ -19,6 +19,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public Inventory createInventory(Inventory inventory) {
+
         return inventoryRepository.save(inventory);
     }
 
@@ -28,17 +29,17 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public Inventory getInventoryById(Long id) {
+    public Inventory getInventoryByProductId(Long productId) {
 
-        return inventoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with id: "+id));
+        return inventoryRepository.findByProductId(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with productId: "+ productId));
     }
 
     @Override
-    public Inventory updateInventoryById(Inventory inventory, Long id) {
+    public Inventory updateInventoryById(Inventory inventory, Long productId) {
 
-        Inventory updatedInventory = inventoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with id: "+id));
+        Inventory updatedInventory = inventoryRepository.findByProductId(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with productId: "+ productId));
 
         updatedInventory.setProductId(inventory.getProductId());
         updatedInventory.setQuantity(inventory.getQuantity());
@@ -47,9 +48,9 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public void deleteInventory(Long id) {
-        Inventory inventory = inventoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with id: "+id));
+    public void deleteInventory(Long productId) {
+        Inventory inventory = inventoryRepository.findByProductId(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with productId: "+ productId));
 
         inventoryRepository.delete(inventory);
     }

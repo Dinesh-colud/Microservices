@@ -11,9 +11,9 @@ public interface InventoryService {
 
     List<Inventory> getAllInventory();
 
-    Inventory getInventoryById(Long id);
+    Inventory getInventoryByProductId(Long productId);
 
-    Inventory updateInventoryById(Inventory inventory, Long id);
+    Inventory updateInventoryById(Inventory inventory, Long productId);
 
-    void deleteInventory(Long id);
+    void deleteInventory(Long productId);
 }

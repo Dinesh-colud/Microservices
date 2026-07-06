@@ -30,22 +30,22 @@ public class InventoryController {
         return new ResponseEntity<>(inventories, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Inventory> getInventoryById(@PathVariable Long id){
-        Inventory inventory = inventoryService.getInventoryById(id);
+    @GetMapping("/{productId}")
+    public ResponseEntity<Inventory> getInventoryById(@PathVariable Long productId){
+        Inventory inventory = inventoryService.getInventoryByProductId(productId);
         return new ResponseEntity<>(inventory, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{productId}")
     public ResponseEntity<Inventory> updateInventory(@RequestBody Inventory inventory,
-                                                     @PathVariable Long id){
-        Inventory inventory1 = inventoryService.updateInventoryById(inventory, id);
+                                                     @PathVariable Long productId){
+        Inventory inventory1 = inventoryService.updateInventoryById(inventory, productId);
         return new ResponseEntity<>(inventory1, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteInventory(@PathVariable Long id){
-        inventoryService.deleteInventory(id);
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<String> deleteInventory(@PathVariable Long productId){
+        inventoryService.deleteInventory(productId);
 
         return ResponseEntity.ok("Inventory deleted successfully!");
     }
