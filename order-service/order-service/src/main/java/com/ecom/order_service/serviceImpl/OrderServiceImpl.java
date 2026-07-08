@@ -31,6 +31,10 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderDate(LocalDateTime.now());
 
         if(response.getQuantity() >= order.getQuantity()){
+
+            inventoryClient.reduceStock(order.getProductId(),
+                    order.getQuantity());
+
             return orderRepository.save(order);
         } else {
             throw new ResourceNotFoundException("Out of Stock");

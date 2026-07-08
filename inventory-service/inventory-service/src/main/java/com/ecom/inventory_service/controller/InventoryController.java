@@ -50,5 +50,11 @@ public class InventoryController {
         return ResponseEntity.ok("Inventory deleted successfully!");
     }
 
+    @PutMapping("/reduce/{productId}")
+    public  ResponseEntity<Inventory> reduceStock(@PathVariable Long productId,
+                                                  @RequestParam Integer quantity){
+        return new ResponseEntity<>(inventoryService.reduceStock(productId, quantity), HttpStatus.OK);
+    }
+
 }
 

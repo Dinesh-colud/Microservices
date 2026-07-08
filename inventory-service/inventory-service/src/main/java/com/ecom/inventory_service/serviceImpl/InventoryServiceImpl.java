@@ -54,4 +54,19 @@ public class InventoryServiceImpl implements InventoryService {
 
         inventoryRepository.delete(inventory);
     }
+
+    @Override
+    public Inventory reduceStock(Long productId, Integer quantity) {
+
+        Inventory inventory = inventoryRepository.findByProductId(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found with productId: "+productId));
+
+        if(inventory.getQuantity() >= quantity){
+            inventory.setQuantity(inventory.getQuantity() - quantity);
+            return inventoryRepository.save(inventory);
+        } else {
+           throw new ResourceNotFoundException("Insufficient stock available");
+        }
+    }
+
 }

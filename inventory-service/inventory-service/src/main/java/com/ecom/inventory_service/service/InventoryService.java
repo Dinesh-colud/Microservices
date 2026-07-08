@@ -16,4 +16,7 @@ public interface InventoryService {
     Inventory updateInventoryById(Inventory inventory, Long productId);
 
     void deleteInventory(Long productId);
+
+
+    Inventory reduceStock(Long productId, Integer quantity);
 }
